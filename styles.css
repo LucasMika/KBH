@@ -592,3 +592,31 @@ section h2 {
   color: #ff8f82;
   font-weight: 600;
 }
+
+
+/* ---------- FADE-IN / OUT for service check result ---------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-5px); }
+}
+
+.check-result {
+  opacity: 0;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.check-result.fading-out {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+.check-result.show {
+  animation: fadeIn 0.5s ease forwards;
+}
