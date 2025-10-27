@@ -69,23 +69,15 @@ const seasonalMenus = {
   ]
 };
 
-const inspirations = [
-  "Pan-seared scallops with saffron-infused beurre blanc",
-  "Smoked paprika lamb chops over rosemary polenta",
-  "Butternut squash agnolotti finished with brown butter sage",
-  "Charred citrus salmon with fennel and orange salad",
-  "Wild mushroom tart with goat cheese and thyme drizzle"
-];
-
-const menuHighlight = document.querySelector(".menu-highlight");
-const shuffleButton = document.querySelector(".shuffle-button");
 const menuTabs = document.querySelectorAll(".menu-tabs button");
 const menuItemsContainer = document.getElementById("menu-items");
 const navToggle = document.querySelector(".nav-toggle");
 const mainNav = document.querySelector(".main-nav");
 const form = document.querySelector(".contact-form");
 const feedback = document.querySelector(".form-feedback");
+const submitButton = form?.querySelector("button[type='submit']");
 const yearSpan = document.getElementById("year");
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/mikald1318@gmail.com";
 
 function renderMenu(season = "spring") {
   menuItemsContainer.innerHTML = "";
@@ -107,17 +99,6 @@ function setActiveTab(activeButton) {
     button.setAttribute("aria-selected", isActive);
   });
 }
-
-function shuffleInspiration() {
-  const randomIndex = Math.floor(Math.random() * inspirations.length);
-  menuHighlight.textContent = inspirations[randomIndex];
-}
-
-shuffleButton?.addEventListener("click", () => {
-  shuffleInspiration();
-  shuffleButton.classList.add("pulse");
-  setTimeout(() => shuffleButton.classList.remove("pulse"), 400);
-});
 
 menuTabs.forEach((button) => {
   button.addEventListener("click", () => {
@@ -141,14 +122,60 @@ mainNav?.querySelectorAll("a").forEach((link) => {
   });
 });
 
-form?.addEventListener("submit", (event) => {
+form?.addEventListener("submit", async (event) => {
   event.preventDefault();
-  feedback.textContent = "Thank you! We’ll reach out within 24 hours.";
-  form.reset();
+
+  if (!feedback || !submitButton) {
+    return;
+  }
+
+  feedback.textContent = "Sending your message...";
+  feedback.classList.remove("error", "success");
+  feedback.classList.add("pending");
+
+  submitButton.disabled = true;
+  const originalButtonText = submitButton.textContent;
+  submitButton.textContent = "Sending...";
+
+  try {
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    const response = await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        ...payload,
+        _replyto: payload.email,
+        _subject: "Savory Creations Inquiry",
+        _template: "table"
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Submission failed with status ${response.status}`);
+    }
+
+    await response.json();
+    feedback.textContent = "Thank you! Your message has been sent.";
+    feedback.classList.add("success");
+    form.reset();
+  } catch (error) {
+    console.error("Form submission failed:", error);
+    feedback.textContent =
+      "We couldn’t send your message. Please try again or email us directly at mikald1318@gmail.com.";
+    feedback.classList.add("error");
+  } finally {
+    feedback.classList.remove("pending");
+    submitButton.disabled = false;
+    submitButton.textContent = originalButtonText;
+  }
 });
 
 yearSpan.textContent = new Date().getFullYear();
 
 // initial state
 renderMenu();
-shuffleInspiration();

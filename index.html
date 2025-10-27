@@ -51,11 +51,6 @@
           </p>
           <a href="#contact" class="cta-button">Plan Your Next Event</a>
         </div>
-        <div class="hero-card" aria-live="polite">
-          <h3>Tonight's Inspiration</h3>
-          <p class="menu-highlight"></p>
-          <button class="shuffle-button" type="button">Show Another Dish</button>
-        </div>
       </section>
 
       <section class="services" id="services">
@@ -119,7 +114,18 @@
 
       <section class="contact" id="contact">
         <h2>Let’s Cook Something Memorable</h2>
-        <form class="contact-form">
+        <form
+          class="contact-form"
+          action="https://formsubmit.co/mikald1318@gmail.com"
+          method="POST"
+        >
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_subject" value="Savory Creations Inquiry" />
+          <input
+            type="hidden"
+            name="_autoresponse"
+            value="Thank you for contacting Savory Creations. We'll be in touch soon!"
+          />
           <div class="field">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" placeholder="Your name" required />
