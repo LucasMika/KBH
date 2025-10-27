@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Savory Creations | Personal Chef Services</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="logo-wrap">
+        <img src="assets/logo.svg" alt="Savory Creations logo" class="logo" />
+        <div class="brand-text">
+          <h1>Savory Creations</h1>
+          <p>Personal Chef Services</p>
+        </div>
+      </div>
+      <nav class="main-nav" id="site-navigation">
+        <a href="#services">Services</a>
+        <a href="#menus">Menus</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="hero-content">
+          <h2>Savor memorable meals crafted just for you.</h2>
+          <p>
+            From intimate dinners to elevated weekly meal prep, Savory Creations brings
+            restaurant-quality dining to the comfort of your home.
+          </p>
+          <a href="#contact" class="cta-button">Plan Your Next Event</a>
+        </div>
+        <div class="hero-card" aria-live="polite">
+          <h3>Tonight's Inspiration</h3>
+          <p class="menu-highlight"></p>
+          <button class="shuffle-button" type="button">Show Another Dish</button>
+        </div>
+      </section>
+
+      <section class="services" id="services">
+        <h2>Curated Culinary Experiences</h2>
+        <div class="service-grid">
+          <article class="service-card">
+            <h3>Private Dining</h3>
+            <p>
+              Impress your guests with multi-course menus prepared and plated in your own kitchen.
+            </p>
+          </article>
+          <article class="service-card">
+            <h3>Weekly Meal Prep</h3>
+            <p>
+              Customized, ready-to-enjoy meals that nourish your week without sacrificing flavor.
+            </p>
+          </article>
+          <article class="service-card">
+            <h3>Celebration Catering</h3>
+            <p>
+              Celebrate milestones with tailored spreads that reflect your story and tastes.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="menus" id="menus">
+        <h2>Seasonal Menus</h2>
+        <div class="menu-tabs" role="tablist" aria-label="Seasonal menu categories">
+          <button role="tab" aria-selected="true" data-season="spring">Spring</button>
+          <button role="tab" aria-selected="false" data-season="summer">Summer</button>
+          <button role="tab" aria-selected="false" data-season="autumn">Autumn</button>
+          <button role="tab" aria-selected="false" data-season="winter">Winter</button>
+        </div>
+        <div class="menu-items" id="menu-items" tabindex="0" aria-live="polite"></div>
+      </section>
+
+      <section class="testimonials" id="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonial-grid">
+          <figure>
+            <blockquote>
+              “Every bite felt like a celebration. The attention to detail was unmatched.”
+            </blockquote>
+            <figcaption>— Morgan L.</figcaption>
+          </figure>
+          <figure>
+            <blockquote>
+              “Our anniversary dinner at home outshone any restaurant experience we’ve had.”
+            </blockquote>
+            <figcaption>— Priya & Ethan</figcaption>
+          </figure>
+          <figure>
+            <blockquote>
+              “Savory Creations transformed weeknight dinners into moments we look forward to.”
+            </blockquote>
+            <figcaption>— The Ramirez Family</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <h2>Let’s Cook Something Memorable</h2>
+        <form class="contact-form">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+          <div class="field">
+            <label for="event">Event Date</label>
+            <input type="date" id="event" name="event" />
+          </div>
+          <div class="field">
+            <label for="message">Tell us about your vision</label>
+            <textarea id="message" name="message" rows="4" placeholder="Share flavors, guests, and special notes"></textarea>
+          </div>
+          <button type="submit">Request a Consultation</button>
+          <p class="form-feedback" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Savory Creations. Crafted with heart in every kitchen.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
