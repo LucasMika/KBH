@@ -1,146 +1,139 @@
-// --- Seasonal Menus ---
-const seasonalMenus = {
-  spring: [
-    { title: "Citrus Poached Halibut", description: "Shaved fennel salad, grapefruit beurre blanc, chive oil", price: "$38" },
-    { title: "Morel Mushroom Risotto", description: "Parmesan crisp, pea tendrils, preserved lemon", price: "$32" },
-    { title: "Lavender Honey Panna Cotta", description: "Macadamia crumble, blood orange glaze", price: "$16" }
-  ],
-  summer: [
-    { title: "Heirloom Tomato Carpaccio", description: "Pickled shallot, basil oil, smoked sea salt", price: "$18" },
-    { title: "Grilled Peach & Burrata Salad", description: "Prosciutto, spiced pecans, aged balsamic", price: "$24" },
-    { title: "Charred Chimichurri Tenderloin", description: "Sweet corn purée, blistered shishito, herb jus", price: "$44" }
-  ],
-  autumn: [
-    { title: "Pumpkin Velouté", description: "Brown butter crumble, sage cream, pepitas", price: "$14" },
-    { title: "Cider-Glazed Duck Breast", description: "Farro pilaf, roasted figs, spiced jus", price: "$42" },
-    { title: "Roasted Pear Tarte Tatin", description: "Vanilla bean mascarpone, burnt caramel", price: "$18" }
-  ],
-  winter: [
-    { title: "Truffle Cauliflower Soup", description: "Crispy pancetta, parsley oil, brioche crumbs", price: "$16" },
-    { title: "Braised Short Ribs", description: "Parsnip silk, red wine jus, charred scallions", price: "$40" },
-    { title: "Molten Spiced Chocolate Cake", description: "Cayenne ganache, cinnamon chantilly", price: "$15" }
-  ]
-};
+/* ================================
+   Savory Creations - Core JS
+   ================================ */
 
-const menuTabs = document.querySelectorAll(".menu-tabs button");
-const menuItemsContainer = document.getElementById("menu-items");
+/* --- Header nav (kept minimal) --- */
 const navToggle = document.querySelector(".nav-toggle");
 const mainNav = document.querySelector(".main-nav");
-const form = document.querySelector(".contact-form");
-const feedback = document.querySelector(".form-feedback");
-const submitButton = form?.querySelector("button[type='submit']");
-const yearSpan = document.getElementById("year");
+navToggle?.addEventListener("click", () => mainNav?.classList.toggle("open"));
 
-// Prefer AJAX; fall back to native POST if blocked
-const FORM_ENDPOINT = "https://formsubmit.co/ajax/mikald1318@gmail.com";
-
-function renderMenu(season = "spring") {
-  if (!menuItemsContainer) return;
-  menuItemsContainer.innerHTML = "";
-  seasonalMenus[season].forEach((item) => {
-    const article = document.createElement("article");
-    article.classList.add("menu-item");
-    article.innerHTML = `
-      <h3>${item.title}</h3>
-      <p>${item.description}</p>
-      <span>${item.price}</span>
-    `;
-    menuItemsContainer.appendChild(article);
-  });
-}
-
-function setActiveTab(activeButton) {
-  menuTabs.forEach((button) => {
-    const isActive = button === activeButton;
-    button.setAttribute("aria-selected", isActive);
-  });
-}
-
-menuTabs.forEach((button) => {
-  button.addEventListener("click", () => {
-    const season = button.dataset.season;
-    renderMenu(season);
-    setActiveTab(button);
-  });
-});
-
-navToggle?.addEventListener("click", () => {
-  const isOpen = mainNav.classList.toggle("open");
-  navToggle.setAttribute("aria-expanded", isOpen);
-});
-
-mainNav?.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    if (mainNav.classList.contains("open")) {
-      mainNav.classList.remove("open");
-      navToggle?.setAttribute("aria-expanded", "false");
+/* --- Smooth scroll for same-page links --- */
+document.querySelectorAll('a[href^="#"]').forEach((a) => {
+  a.addEventListener("click", (e) => {
+    const id = a.getAttribute("href");
+    if (id && id.startsWith("#")) {
+      e.preventDefault();
+      const el = document.querySelector(id);
+      el?.scrollIntoView({ behavior: "smooth" });
+      mainNav?.classList.remove("open");
     }
   });
 });
 
-// ---------- FIXED FALLBACK LOGIC ----------
-function handleSubmit(event) {
-  event.preventDefault();
+/* ================================
+   SERVICE AREA CHECKER (No API)
+   ================================ */
+(function () {
+  console.log("[ServiceCheck] script loaded");
 
-  if (!feedback || !submitButton) return;
+  // Hubs + radii (km)
+  const SERVICE_HUBS = [
+    { name: "Greater Grand Rapids",    lat: 42.9634, lng: -85.6681, radiusKm: 35 },
+    { name: "Holland (Lakeshore)",     lat: 42.7875, lng: -86.1089, radiusKm: 32 },
+    { name: "Grand Haven (Lakeshore)", lat: 43.0631, lng: -86.2284, radiusKm: 28 },
+    { name: "Muskegon (Lakeshore)",    lat: 43.2342, lng: -86.2484, radiusKm: 28 }
+  ];
 
-  feedback.textContent = "Sending your message...";
-  feedback.classList.remove("error", "success");
-  feedback.classList.add("pending");
+  // Haversine distance (km)
+  function haversineKm(lat1, lng1, lat2, lng2) {
+    const toRad = (d) => (d * Math.PI) / 180;
+    const R = 6371;
+    const dLat = toRad(lat2 - lat1);
+    const dLng = toRad(lng2 - lng1);
+    const a =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+      Math.sin(dLng / 2) ** 2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
 
-  submitButton.disabled = true;
-  const originalText = submitButton.textContent;
-  submitButton.textContent = "Sending…";
-
-  (async () => {
-    try {
-      const formData = new FormData(form);
-
-      // basic validation
-      const email = String(formData.get("email") || "");
-      if (!email.includes("@")) throw new Error("Please enter a valid email.");
-
-      // honeypot
-      if (formData.get("_honey")) throw new Error("Bot detected.");
-
-      const payload = Object.fromEntries(formData.entries());
-
-      const res = await fetch(FORM_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          ...payload,
-          _replyto: email,
-          _subject: "Savory Creations Inquiry",
-          _template: "table"
-        })
-      });
-
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      await res.json();
-
-      // success → go to thank-you page if present
-      window.location.href = "/thank-you.html";
-    } catch (err) {
-      console.error("Form submission via AJAX failed:", err);
-      // fall back to native POST (needs the handler removed first)
-      try {
-        form.removeEventListener("submit", handleSubmit);
-        form.submit();
-      } catch (fallbackErr) {
-        console.error("Native submit fallback failed:", fallbackErr);
-        feedback.textContent = "We couldn’t send your message. Please email us directly at mikald1318@gmail.com.";
-        feedback.classList.remove("pending");
-        feedback.classList.add("error");
-        submitButton.disabled = false;
-        submitButton.textContent = originalText;
-      }
+  function isInServiceArea(lat, lng) {
+    for (const hub of SERVICE_HUBS) {
+      const d = haversineKm(lat, lng, hub.lat, hub.lng);
+      if (d <= hub.radiusKm) return { ok: true, hub: hub.name, distanceKm: d.toFixed(1) };
     }
-  })();
-}
+    return { ok: false };
+  }
 
+  function ui(el, text, cls) {
+    if (!el) return;
+    el.textContent = text;
+    el.classList.remove("ok", "nope", "pending");
+    if (cls) el.classList.add(cls);
+  }
 
+  function onClickCheck(btn, resultEl) {
+    console.log("[ServiceCheck] button clicked");
+    ui(resultEl, "Checking your location…", "pending");
 
-// Footer year + initial render
-if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-renderMenu();
+    // Must be HTTPS or localhost
+    if (location.protocol !== "https:" && location.hostname !== "localhost") {
+      ui(resultEl, "Location only works over HTTPS (or localhost). Open your secure site URL.", "nope");
+      console.warn("[ServiceCheck] Not HTTPS/localhost");
+      return;
+    }
+
+    if (!("geolocation" in navigator)) {
+      ui(resultEl, "Geolocation isn’t supported by your browser.", "nope");
+      console.warn("[ServiceCheck] No geolocation");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        console.log("[ServiceCheck] coords:", latitude, longitude);
+        const res = isInServiceArea(latitude, longitude);
+        if (res.ok) {
+          ui(resultEl, `✅ You're in our service area (${res.hub}).`, "ok");
+        } else {
+          ui(resultEl, "❌ You appear to be outside our service area. Still message me—exceptions are possible!", "nope");
+        }
+      },
+      (err) => {
+        console.error("[ServiceCheck] geolocation error:", err);
+        let msg = "Couldn’t access your location. ";
+        if (err.code === 1) msg += "Permission denied. Enable location for this site and try again.";
+        else if (err.code === 2) msg += "Position unavailable. Try again.";
+        else if (err.code === 3) msg += "Timed out. Try again.";
+        ui(resultEl, msg, "nope");
+      },
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 0 }
+    );
+  }
+
+  function bindHandler() {
+    const btn = document.getElementById("check-my-location");
+    const result = document.getElementById("check-result");
+    if (!btn || !result) {
+      console.warn("[ServiceCheck] elements not found yet");
+      return false;
+    }
+    if (btn.dataset.bound === "1") return true;
+    btn.dataset.bound = "1";
+    btn.addEventListener("click", () => onClickCheck(btn, result));
+    console.log("[ServiceCheck] handler bound");
+    return true;
+  }
+
+  // 1) Try now (defer should make DOM ready, but just in case)
+  if (!bindHandler()) {
+    // 2) Try on DOMContentLoaded
+    document.addEventListener("DOMContentLoaded", bindHandler, { once: true });
+    // 3) Try again after a short delay (for late DOM inserts)
+    setTimeout(bindHandler, 500);
+  }
+
+  // 4) Inline debug hook (from HTML onclick) — guarantees we can test the flow
+  window._debugClick = function () {
+    console.log("[ServiceCheck] _debugClick fired");
+    const btn = document.getElementById("check-my-location");
+    const result = document.getElementById("check-result");
+    if (!btn || !result) {
+      alert("Service checker elements not found in DOM.");
+      return;
+    }
+    onClickCheck(btn, result);
+  };
+})();

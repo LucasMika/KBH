@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="icon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -64,19 +65,53 @@
         </div>
       </section>
 
-      <section class="menus" id="menus">
-        <h2>Seasonal Menus</h2>
-        <div class="menu-tabs" role="tablist" aria-label="Seasonal menu categories">
-          <button role="tab" aria-selected="true" data-season="spring">Spring</button>
-          <button role="tab" aria-selected="false" data-season="summer">Summer</button>
-          <button role="tab" aria-selected="false" data-season="autumn">Autumn</button>
-          <button role="tab" aria-selected="false" data-season="winter">Winter</button>
-        </div>
-        <div class="menu-items" id="menu-items" tabindex="0" aria-live="polite"></div>
-      </section>
+      <!-- ABOUT ME SECTION -->
+<section class="about" id="about">
+  <h2>About Me</h2>
+
+  <div class="about-content">
+    <figure class="about-photo">
+      <img src="assets/Kbird.jpg" alt="Chef Katie Bird" />
+    </figure>
+
+    <div class="about-text">
+      <p>
+        Hello. I’m <strong>Katie Bird</strong>—the founder and Chef of <strong>Savory Creations</strong>.
+        I am dedicated to providing nutritious and flavorful meals that will give you more time to do
+        the things you love and less time stressing about what you will eat.
+      </p>
+      <p>
+        From grocery shopping to cooking and packaging, I handle every step, ensuring that
+        seasonal ingredients take center stage—because quality and taste will always shine through.
+        By working closely with you, I develop recipes catered to your needs, regardless of dietary
+        restrictions or personal preferences. I’m always willing to adapt to fit your lifestyle best.
+      </p>
+      <p>
+        My goal is to reach those with busy lives who want balanced, delicious meals but lack the time
+        to make them—or those who simply want to learn how to eat well without sacrificing flavor.
+      </p>
+      <p>
+        I believe that food is one of the few things in life that truly connects everyone.
+        Letting me take over the cooking means you get more time to connect with the people
+        you love—or maybe even start that new passion project.
+      </p>
+    </div>
+  </div>
+</section>
+<section class="service-check" id="service-check">
+  <h2>Where I Work</h2>
+  <p class="service-note">I currently serve the Lakeshore and greater Grand Rapids area.</p>
+
+  <div class="checker">
+    <button id="check-my-location" class="cta-button">Use My Location</button>
+    <p id="check-result" class="check-result" aria-live="polite"></p>
+  </div>
+</section>
+
+
 
       <section class="testimonials" id="testimonials">
-        <h2>What Our Clients Say</h2>
+        <h2>What My Clients Say</h2>
         <div class="testimonial-grid">
           <figure>
             <blockquote>“Every bite felt like a celebration. The attention to detail was unmatched.”</blockquote>
