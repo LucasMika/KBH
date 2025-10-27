@@ -6,10 +6,17 @@
   --text-primary: #fefefe;
   --text-secondary: rgba(255, 255, 255, 0.75);
   --accent: #ff6740;
+
+  --max-content-width: 1200px;
 }
 
+/* ---------- RESET & GLOBAL ---------- */
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -18,6 +25,7 @@ body {
   background-color: var(--deep-chocolate);
   color: var(--text-primary);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 img {
@@ -28,13 +36,15 @@ img {
 a {
   color: inherit;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
+/* ---------- HEADER ---------- */
 .site-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 6vw;
+  padding: 1rem 6vw;
   background: rgba(15, 10, 10, 0.85);
   position: sticky;
   top: 0;
@@ -49,26 +59,27 @@ a {
 }
 
 .logo {
-  width: 100px;
+  width: 80px;
   height: auto;
 }
 
 .brand-text h1 {
   font-family: "Playfair Display", serif;
   margin: 0;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.15rem;
   text-transform: uppercase;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .brand-text p {
   margin: 0.2rem 0 0;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 0.25rem;
   text-transform: uppercase;
   color: var(--text-secondary);
 }
 
+/* ---------- NAV ---------- */
 .main-nav {
   display: flex;
   gap: 2rem;
@@ -113,39 +124,36 @@ a {
   background: var(--text-primary);
 }
 
-main {
-  padding: 0 6vw 4rem;
-}
-
+/* ---------- HERO ---------- */
 .hero {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 6rem 0 4rem;
-  text-align: center;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 1rem 4rem;
+  min-height: 80vh;
 }
 
 .hero-content {
-  max-width: 640px;
+  max-width: 700px;
 }
 
 .hero h2 {
   font-family: "Playfair Display", serif;
-  font-size: clamp(2.4rem, 3vw + 1.5rem, 3.6rem);
+  font-size: clamp(2rem, 4vw + 1rem, 3.6rem);
   margin-bottom: 1rem;
 }
 
 .hero p {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   color: var(--text-secondary);
-  max-width: 640px;
 }
 
 .cta-button {
   display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.85rem 1.8rem;
+  margin-top: 2rem;
+  padding: 0.9rem 2rem;
   background: linear-gradient(135deg, var(--velvet-red), var(--accent));
   color: var(--text-primary);
   border-radius: 999px;
@@ -160,22 +168,30 @@ main {
   box-shadow: 0 12px 24px rgba(215, 47, 38, 0.35);
 }
 
+/* ---------- SECTIONS ---------- */
+main {
+  padding: 0 6vw 5rem;
+  margin: 0 auto;
+  max-width: var(--max-content-width);
+}
+
 section {
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
 }
 
 section h2 {
   font-family: "Playfair Display", serif;
-  font-size: clamp(2rem, 2vw + 1.5rem, 2.8rem);
+  font-size: clamp(1.8rem, 2vw + 1rem, 2.6rem);
   margin-bottom: 2rem;
   text-align: center;
 }
 
+/* ---------- SERVICE CARDS ---------- */
 .service-grid,
 .testimonial-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
 }
 
 .service-card,
@@ -184,7 +200,6 @@ section h2 {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 1.8rem;
-  height: 100%;
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
@@ -198,13 +213,14 @@ section h2 {
 
 .service-card h3 {
   margin-top: 0;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .service-card p {
   color: var(--text-secondary);
 }
 
+/* ---------- MENUS ---------- */
 .menu-tabs {
   display: flex;
   justify-content: center;
@@ -233,8 +249,8 @@ section h2 {
 
 .menu-items {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.8rem;
 }
 
 .menu-item {
@@ -260,6 +276,7 @@ section h2 {
   color: var(--text-primary);
 }
 
+/* ---------- TESTIMONIALS ---------- */
 .testimonials blockquote {
   margin: 0 0 1rem;
   font-style: italic;
@@ -272,23 +289,24 @@ section h2 {
   color: var(--warm-gold);
 }
 
+/* ---------- CONTACT ---------- */
 .contact {
   background: radial-gradient(circle at top, rgba(215, 47, 38, 0.15), transparent 60%);
-  padding: 3rem;
+  padding: 3rem 1.5rem;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 .contact-form {
-  max-width: 620px;
-  margin: 0 auto;
   display: grid;
-  gap: 1.4rem;
+  gap: 1.5rem;
 }
 
 .field label {
   display: block;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.4rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -298,12 +316,13 @@ section h2 {
 .field input,
 .field textarea {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.8rem 1rem;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(20, 14, 14, 0.9);
   color: var(--text-primary);
   font-family: inherit;
+  font-size: 1rem;
 }
 
 .field input:focus,
@@ -313,7 +332,7 @@ section h2 {
 
 .contact-form button {
   justify-self: start;
-  padding: 0.8rem 1.8rem;
+  padding: 0.9rem 1.9rem;
   border-radius: 999px;
   border: none;
   font-weight: 600;
@@ -347,6 +366,7 @@ section h2 {
   color: var(--text-secondary);
 }
 
+/* ---------- FOOTER ---------- */
 .site-footer {
   text-align: center;
   padding: 2.5rem 1rem;
@@ -354,37 +374,88 @@ section h2 {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-@media (max-width: 768px) {
-  .main-nav {
-    position: fixed;
-    inset: 0 0 auto auto;
-    margin: 0;
-    top: 70px;
-    flex-direction: column;
-    background: rgba(17, 11, 11, 0.95);
-    padding: 1.5rem 2rem;
-    transform: translateX(110%);
-    transition: transform 0.3s ease;
-    border-radius: 12px 0 0 12px;
-    gap: 1.2rem;
-  }
+/* ---------- RESPONSIVE BREAKPOINTS ---------- */
 
-  .main-nav.open {
-    transform: translateX(0);
+/* tablets */
+@media (max-width: 992px) {
+  .main-nav {
+    display: none;
   }
 
   .nav-toggle {
     display: flex;
   }
-}
 
-@media (min-width: 900px) {
-  .hero {
-    align-items: flex-start;
-    text-align: left;
+  .main-nav.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 6vw;
+    background: rgba(17, 11, 11, 0.95);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    gap: 1.2rem;
+    animation: slideIn 0.3s ease forwards;
   }
 
-  .hero-content {
-    max-width: 700px;
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero {
+    padding: 5rem 2rem 3rem;
+  }
+
+  .hero h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+  }
+
+  .cta-button {
+    padding: 0.8rem 1.6rem;
+  }
+}
+
+/* phones */
+@media (max-width: 600px) {
+  .brand-text h1 {
+    font-size: 1rem;
+  }
+
+  .logo {
+    width: 65px;
+  }
+
+  .service-grid,
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-items {
+    grid-template-columns: 1fr;
+  }
+
+  .contact {
+    padding: 2rem 1rem;
+    border-radius: 16px;
+  }
+
+  .hero {
+    min-height: 70vh;
+    padding: 4rem 1rem 3rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .site-header {
+    padding: 1rem 4vw;
+  }
+
+  .cta-button {
+    margin-top: 1.2rem;
+    font-size: 0.95rem;
   }
 }
