@@ -15,8 +15,8 @@
   <body>
     <header class="site-header">
       <div class="logo-wrap">
-        <!-- fixed logo path (file is in project root) -->
-        <img src="assets/birdlogosmall.webp" alt="Savory Creations pepper and gafdfgfdgfdrlic mark" class="logo" />
+        <!-- ✅ fixed path: logo files live in project root -->
+        <img src="/assets/birdlogosmall.webp" alt="Savory Creations pepper and garlic mark" class="logo" />
         <div class="brand-text">
           <h1>Savory Creations</h1>
           <p>Personal Chef Services</p>
@@ -95,18 +95,21 @@
       <section class="contact" id="contact">
         <h2>Let’s Cook Something Memorable</h2>
 
-        <!-- ✅ Direct FormSubmit post: emails deliver to mikald1318@gmail.com -->
+        <!-- ✅ Progressive enhancement: native POST (fallback) + JS AJAX (preferred) -->
         <form
           class="contact-form"
           action="https://formsubmit.co/mikald1318@gmail.com"
           method="POST"
+          novalidate
         >
           <!-- FormSubmit controls -->
           <input type="hidden" name="_captcha" value="false" />
-          <!-- optional: set your own thank-you page URL -->
-          <!-- <input type="hidden" name="_next" value="https://your-domain.com/thank-you.html" /> -->
           <input type="hidden" name="_subject" value="Savory Creations Inquiry" />
           <input type="hidden" name="_template" value="table" />
+          <!-- relative path works on Render static -->
+          <input type="hidden" name="_next" value="/thank-you.html" />
+          <!-- anti-bot honeypot -->
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
           <div class="field">
             <label for="name">Name</label>
@@ -114,7 +117,6 @@
           </div>
           <div class="field">
             <label for="email">Email</label>
-            <!-- keep 'email' name; FormSubmit recognizes it -->
             <input type="email" id="email" name="email" placeholder="you@example.com" required />
           </div>
           <div class="field">
@@ -127,8 +129,14 @@
           </div>
 
           <button type="submit">Request a Consultation</button>
-          <!-- kept for progressive enhancement; JS won't override native submit now -->
           <p class="form-feedback" role="status" aria-live="polite"></p>
+
+          <noscript>
+            <p class="form-feedback">
+              JavaScript is off. Submitting will redirect through FormSubmit and email
+              <strong>mikald1318@gmail.com</strong>.
+            </p>
+          </noscript>
         </form>
       </section>
     </main>

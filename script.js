@@ -26,7 +26,13 @@ const menuTabs = document.querySelectorAll(".menu-tabs button");
 const menuItemsContainer = document.getElementById("menu-items");
 const navToggle = document.querySelector(".nav-toggle");
 const mainNav = document.querySelector(".main-nav");
+const form = document.querySelector(".contact-form");
+const feedback = document.querySelector(".form-feedback");
+const submitButton = form?.querySelector("button[type='submit']");
 const yearSpan = document.getElementById("year");
+
+// Prefer AJAX on hosts with strict CSP/form-action; fall back to native submit if AJAX blocked.
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/mikald1318@gmail.com";
 
 function renderMenu(season = "spring") {
   if (!menuItemsContainer) return;
@@ -70,6 +76,76 @@ mainNav?.querySelectorAll("a").forEach((link) => {
       navToggle?.setAttribute("aria-expanded", "false");
     }
   });
+});
+
+// --- Form (AJAX first, graceful fallback) ---
+form?.addEventListener("submit", async (event) => {
+  // If no JS or fetch fails, the native POST will kick in (when we don't preventDefault)
+  // We *do* preventDefault here to try AJAX first; if it throws, we remove the handler and submit natively.
+  event.preventDefault();
+
+  if (!feedback || !submitButton) return;
+
+  feedback.textContent = "Sending your message...";
+  feedback.classList.remove("error", "success");
+  feedback.classList.add("pending");
+
+  submitButton.disabled = true;
+  const originalText = submitButton.textContent;
+  submitButton.textContent = "Sending…";
+
+  try {
+    const formData = new FormData(form);
+    // Basic client-side validation (keeps UX tight)
+    if (!formData.get("email") || !String(formData.get("email")).includes("@")) {
+      throw new Error("Please enter a valid email.");
+    }
+
+    // Honeypot quick check
+    if (formData.get("_honey")) {
+      throw new Error("Bot detected.");
+    }
+
+    const payload = Object.fromEntries(formData.entries());
+
+    const res = await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        ...payload,
+        _replyto: payload.email,
+        _subject: "Savory Creations Inquiry",
+        _template: "table"
+      })
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    await res.json();
+
+    // If you have thank-you.html deployed, bounce there; else show inline success.
+    window.location.href = "/thank-you.html";
+  } catch (err) {
+    console.error("Form submission via AJAX failed:", err);
+
+    // Fall back to native submit if AJAX is blocked by CSP/adblock/etc.
+    feedback.textContent = "Trying alternate send…";
+    feedback.classList.remove("error");
+    feedback.classList.add("pending");
+
+    try {
+      // Remove this handler to avoid recursion, then submit natively to action=
+      form.removeEventListener("submit", arguments.callee);
+      form.submit();
+    } catch (fallbackErr) {
+      console.error("Native submit fallback failed:", fallbackErr);
+      feedback.textContent = "We couldn’t send your message. Please email us directly at mikald1318@gmail.com.";
+      feedback.classList.remove("pending");
+      feedback.classList.add("error");
+    }
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = originalText;
+  }
 });
 
 // Footer year
