@@ -31,7 +31,7 @@ const feedback = document.querySelector(".form-feedback");
 const submitButton = form?.querySelector("button[type='submit']");
 const yearSpan = document.getElementById("year");
 
-// Prefer AJAX on hosts with strict CSP/form-action; fall back to native submit if AJAX blocked.
+// Prefer AJAX; fall back to native POST if blocked
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/mikald1318@gmail.com";
 
 function renderMenu(season = "spring") {
@@ -78,10 +78,8 @@ mainNav?.querySelectorAll("a").forEach((link) => {
   });
 });
 
-// --- Form (AJAX first, graceful fallback) ---
-form?.addEventListener("submit", async (event) => {
-  // If no JS or fetch fails, the native POST will kick in (when we don't preventDefault)
-  // We *do* preventDefault here to try AJAX first; if it throws, we remove the handler and submit natively.
+// ---------- FIXED FALLBACK LOGIC ----------
+function handleSubmit(event) {
   event.preventDefault();
 
   if (!feedback || !submitButton) return;
@@ -94,62 +92,55 @@ form?.addEventListener("submit", async (event) => {
   const originalText = submitButton.textContent;
   submitButton.textContent = "Sending…";
 
-  try {
-    const formData = new FormData(form);
-    // Basic client-side validation (keeps UX tight)
-    if (!formData.get("email") || !String(formData.get("email")).includes("@")) {
-      throw new Error("Please enter a valid email.");
-    }
-
-    // Honeypot quick check
-    if (formData.get("_honey")) {
-      throw new Error("Bot detected.");
-    }
-
-    const payload = Object.fromEntries(formData.entries());
-
-    const res = await fetch(FORM_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify({
-        ...payload,
-        _replyto: payload.email,
-        _subject: "Savory Creations Inquiry",
-        _template: "table"
-      })
-    });
-
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    await res.json();
-
-    // If you have thank-you.html deployed, bounce there; else show inline success.
-    window.location.href = "/thank-you.html";
-  } catch (err) {
-    console.error("Form submission via AJAX failed:", err);
-
-    // Fall back to native submit if AJAX is blocked by CSP/adblock/etc.
-    feedback.textContent = "Trying alternate send…";
-    feedback.classList.remove("error");
-    feedback.classList.add("pending");
-
+  (async () => {
     try {
-      // Remove this handler to avoid recursion, then submit natively to action=
-      form.removeEventListener("submit", arguments.callee);
-      form.submit();
-    } catch (fallbackErr) {
-      console.error("Native submit fallback failed:", fallbackErr);
-      feedback.textContent = "We couldn’t send your message. Please email us directly at mikald1318@gmail.com.";
-      feedback.classList.remove("pending");
-      feedback.classList.add("error");
+      const formData = new FormData(form);
+
+      // basic validation
+      const email = String(formData.get("email") || "");
+      if (!email.includes("@")) throw new Error("Please enter a valid email.");
+
+      // honeypot
+      if (formData.get("_honey")) throw new Error("Bot detected.");
+
+      const payload = Object.fromEntries(formData.entries());
+
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          ...payload,
+          _replyto: email,
+          _subject: "Savory Creations Inquiry",
+          _template: "table"
+        })
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await res.json();
+
+      // success → go to thank-you page if present
+      window.location.href = "/thank-you.html";
+    } catch (err) {
+      console.error("Form submission via AJAX failed:", err);
+      // fall back to native POST (needs the handler removed first)
+      try {
+        form.removeEventListener("submit", handleSubmit);
+        form.submit();
+      } catch (fallbackErr) {
+        console.error("Native submit fallback failed:", fallbackErr);
+        feedback.textContent = "We couldn’t send your message. Please email us directly at mikald1318@gmail.com.";
+        feedback.classList.remove("pending");
+        feedback.classList.add("error");
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      }
     }
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = originalText;
-  }
-});
+  })();
+}
 
-// Footer year
+form?.addEventListener("submit", handleSubmit);
+
+// Footer year + initial render
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-
-// Initial state
 renderMenu();
