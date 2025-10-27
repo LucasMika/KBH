@@ -45,11 +45,11 @@ a {
 .logo-wrap {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 .logo {
-  width: 80px;
+  width: 56px;
   height: auto;
 }
 
