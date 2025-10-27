@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 220" role="img" aria-labelledby="title desc">
+  <title id="title">Savory Creations mark</title>
+  <desc id="desc">Pepper and garlic line illustration on a red paint splash</desc>
+  <path
+    d="M58 120c40-52 132-106 252-70 18 6 38 20 47 36 11 19 4 36-16 43-40 14-83 12-126 18s-87 22-124 9c-23-8-33-30-23-36z"
+    fill="#c4231b"
+  />
+  <path
+    d="M204 120c12-30 42-44 64-40 6 1 13 4 17 9 5 7 6 17 2 25-7 15-24 26-38 32-20 8-41 14-62 12-12-1-27-7-32-18-4-9 3-16 12-17 13-1 25-1 37-3z"
+    fill="none"
+    stroke="#f9aa6c"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M150 146c-16-14-18-46-5-65 9-12 28-19 39-10 8 7 6 20 0 28-8 10-23 15-34 17 10 6 18 12 22 24-7 8-15 10-22 6z"
+    fill="none"
+    stroke="#f9aa6c"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
