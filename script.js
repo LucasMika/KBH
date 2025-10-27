@@ -139,7 +139,7 @@ function handleSubmit(event) {
   })();
 }
 
-form?.addEventListener("submit", handleSubmit);
+
 
 // Footer year + initial render
 if (yearSpan) yearSpan.textContent = new Date().getFullYear();
