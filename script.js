@@ -139,18 +139,20 @@ form?.addEventListener("submit", async (event) => {
 
   try {
     const formData = new FormData(form);
-    if (!formData.has("_replyto")) {
-      formData.append("_replyto", formData.get("email") || "");
-    }
-    formData.set("_subject", "Savory Creations Inquiry");
-    formData.set("_template", "table");
+    const payload = Object.fromEntries(formData.entries());
 
     const response = await fetch(FORM_ENDPOINT, {
       method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Accept: "application/json"
       },
-      body: formData
+      body: JSON.stringify({
+        ...payload,
+        _replyto: payload.email,
+        _subject: "Savory Creations Inquiry",
+        _template: "table"
+      })
     });
 
     if (!response.ok) {
