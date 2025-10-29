@@ -841,3 +841,20 @@ section h2 {
     .menu-grid article.visible {
         animation: fadeUp 0.8s ease forwards;
     }
+
+
+/* Meal Prep cards reuse .service-card styles */
+.mealprep .menu-grid article.service-card {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: transform 0.3s ease, border-color 0.3s ease, opacity 0.6s ease;
+}
+
+    .mealprep .menu-grid article.service-card.visible {
+        animation: fadeUp 0.8s ease forwards;
+    }
+
+/* text color to match dark cards */
+.mealprep .menu-grid li {
+    color: var(--text-secondary);
+}
