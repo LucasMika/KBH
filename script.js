@@ -38,6 +38,8 @@ if (form) {
         e.preventDefault();
         const formData = new FormData(form);
         const resultEl = document.querySelector(".form-feedback");
+        // NOTE: form-feedback element is not present in index.html, so this will log errors.
+        // I am keeping the logic in case you add the element later.
         if (resultEl) {
             resultEl.textContent = "Sending...";
             resultEl.className = "form-feedback pending";
@@ -252,60 +254,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* =========================================================
-   CAROUSEL GALLERY SCROLL LOGIC (Looping)
+   CAROUSEL GALLERY SCROLL LOGIC (REMOVED - Now CSS Animation)
    ========================================================= */
-document.addEventListener("DOMContentLoaded", () => {
-    const scrollContainer = document.getElementById('scroll-container');
-    const leftArrow = document.getElementById('left-arrow');
-    const rightArrow = document.getElementById('right-arrow');
-
-    if (scrollContainer && leftArrow && rightArrow) {
-        // Calculate item width dynamically (including margin/gap will be more complex due to responsive width,
-        // so we will rely on the scroll-snap behavior which is already in CSS)
-
-        // Determine how far to scroll (1 item)
-        const getScrollAmount = () => {
-            const firstItem = scrollContainer.querySelector('.gallery-item');
-            if (!firstItem) return 0;
-            // Get the width of one item + its right margin/gap (assuming gap is 1rem = 16px)
-            const itemWidth = firstItem.offsetWidth;
-            const gap = 16;
-            return itemWidth + gap;
-        };
-
-        // Function to scroll the carousel
-        const scrollCarousel = (direction) => {
-            const scrollAmount = getScrollAmount();
-
-            if (direction === 'left') {
-                const currentScroll = scrollContainer.scrollLeft;
-
-                if (currentScroll === 0) {
-                    // Loop from start to end
-                    scrollContainer.scrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-                } else {
-                    // Scroll one step left
-                    scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-                }
-
-            } else if (direction === 'right') {
-                const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-                const currentScroll = scrollContainer.scrollLeft;
-
-                // Use a small buffer (e.g., 2px) for floating point comparison issues
-                if (currentScroll >= maxScroll - 2) {
-                    // Loop from end back to start
-                    scrollContainer.scrollLeft = 0;
-                } else {
-                    // Scroll one step right
-                    scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                }
-            }
-        };
-
-        leftArrow.addEventListener('click', () => scrollCarousel('left'));
-        rightArrow.addEventListener('click', () => scrollCarousel('right'));
-
-        // Removed `checkScroll` as the carousel is now looping and arrows are always active.
-    }
-});
+// The infinite scroll effect is now handled completely by the CSS keyframe animation,
+// which is more performant than JavaScript manipulation. The scroll arrows
+// (left-arrow, right-arrow) have been removed from the HTML.
+// The code block that was here has been removed.

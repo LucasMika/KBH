@@ -7,6 +7,7 @@
     --text-secondary: rgba(255, 255, 255, 0.75);
     --accent: #ff6740;
     --max-content-width: 1200px;
+    --scroll-speed: 60s; /* Defines how fast the entire content scrolls */
 }
 
 /* ---------- FONT: Comfortaa ---------- */
@@ -736,12 +737,11 @@ section {
 
 /* Match the Curated Culinary Experiences card look */
 .menu-grid article {
-    background: #fff3ef; /* richer warm tone like the Services cards */
-    border: 2px solid #b93131;
+    background: rgba(255, 250, 247, 0.7);
     border-radius: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     padding: 1.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     opacity: 0;
     transform: translateY(25px);
 }
@@ -753,8 +753,8 @@ section {
 
     .menu-grid article:hover {
         transform: translateY(-4px);
-        border-color: #e94848;
-        box-shadow: 0 8px 20px rgba(185, 49, 49, 0.2);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+        background: rgba(255, 250, 247, 0.9);
     }
 
     /* Section text colors */
@@ -916,95 +916,81 @@ section {
 
 /*
 =========================================================
-  CAROUSEL GALLERY STYLES
+  CAROUSEL GALLERY STYLES (MODIFIED FOR INFINITE LOOP)
 =========================================================
 */
 
 .gallery-showcase {
-    padding: 0 6vw; /* Match main padding, but gallery-carousel handles inner margin */
+    /* Adjusted padding to let the carousel content extend */
+    padding: 0 0;
     margin-bottom: 5rem;
+    overflow: hidden; /* Crucial: hide the content that extends past the viewport */
 }
 
 .gallery-carousel {
-    max-width: var(--max-content-width);
+    /* No max-width here, allow it to span full viewport width */
     margin: 0 auto;
-    position: relative; /* For arrow positioning */
-    display: flex;
-    align-items: center;
+    position: relative;
+    /* Removed display: flex and arrow styles */
 }
 
-/* Scroll Arrows */
+/* Scroll Arrows - Removed as it's an automatic loop now */
 .scroll-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    border: none;
-    background: rgba(32, 22, 22, 0.75);
-    color: var(--text-primary);
-    font-size: 2rem;
-    padding: 0.5rem 0.75rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    border-radius: 999px;
-    height: 50px;
-    width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.75;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: none !important;
 }
 
-    .scroll-arrow:hover {
-        background: var(--velvet-red);
-        opacity: 1;
-    }
-
-.left-arrow {
-    left: 10px;
-}
-
-.right-arrow {
-    right: 10px;
-}
-
-/* Gallery Container (The actual scrolling window) */
+/* Gallery Container (The actual scrolling element) */
 .gallery-grid {
+    /* --- Infinite Loop Changes --- */
     display: flex;
-    overflow-x: scroll; /* Enable horizontal scrolling */
-    scroll-snap-type: x mandatory; /* Snap to each item after scroll */
+    /* IMPORTANT: Must be greater than 100% to contain the original set + the duplicate set */
+    width: 200%;
+    padding: 0 1rem;
     gap: 1rem;
-    padding: 1rem; /* Padding for the shadow and arrows */
-    -webkit-overflow-scrolling: touch; /* Better scrolling on iOS */
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
-    margin: 0 -1rem; /* Counteract inner padding for full width on max-content */
+    /* Remove manual scrolling and snap features */
+    overflow-x: hidden;
+    scroll-snap-type: none;
+    /* Apply the animation */
+    animation: scroll-loop var(--scroll-speed) linear infinite;
+    /* Optional: Pause animation on hover */
+    /* &:hover { animation-play-state: paused; } */
 }
 
-    /* Hide scrollbar for Webkit browsers (Chrome, Safari) */
-    .gallery-grid::-webkit-scrollbar {
-        display: none;
+/* Keep hover pause hint in CSS, but use standard CSS */
+.gallery-carousel:hover .gallery-grid {
+    animation-play-state: paused;
+}
+
+/* The Keyframe Animation */
+@keyframes scroll-loop {
+    0% {
+        transform: translateX(0); /* Start: show the first set of images */
     }
+
+    100% {
+        transform: translateX(-50%); /* End: shift left by half the total width (which is 200%), 
+                                        perfectly aligning the start of the duplicate set with the viewport edge */
+    }
+}
 
 
 .gallery-item {
-    scroll-snap-align: start; /* Snap point for each item */
-    flex: 0 0 auto; /* Prevent items from shrinking/growing */
+    scroll-snap-align: none; /* Removed */
+    flex: 0 0 auto;
     display: block;
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* WIDTH: Control how many images fit on the screen */
-    width: calc(50% - 0.5rem); /* 2 items visible + half a gap on mobile */
-    /* HEIGHT: Taller fixed height for a portrait-friendly aspect ratio (e.g., 3:4) */
+    /* Image Width/Height remain the same, but flex-shrink is crucial */
+    width: calc(50% - 0.5rem); /* 2 items visible + half a gap on mobile (200% width on container means 100% of the *original* content) */
     height: 200px;
     background-color: var(--deep-chocolate);
 }
 
     .gallery-item:hover {
-        transform: translateY(-4px); /* Vertical lift hover for depth */
+        transform: translateY(-4px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
@@ -1012,7 +998,7 @@ section {
         width: 100%;
         height: 100%;
         border-radius: 8px;
-        object-fit: contain;
+        object-fit: cover; /* Changed to cover to fill the item space */
         transition: transform 0.4s ease;
     }
 
