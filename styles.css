@@ -622,7 +622,7 @@ section h2 {
 }
 
 
-/* ---------- MEAL PREP MENU SECTION ---------- */
+/* ---------- MEAL PREP MENU SECTION (match Services style) ---------- */
 .mealprep {
     background: transparent;
     padding: 4rem 1.5rem;
@@ -647,6 +647,62 @@ section h2 {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     text-align: left;
+}
+
+    /* Match the Curated Culinary Experiences card look */
+    .menu-grid article {
+        background: #fffaf7;
+        border: 2px solid #b93131;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+        .menu-grid article.visible {
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        .menu-grid article:hover {
+            transform: translateY(-4px);
+            border-color: #e94848;
+            box-shadow: 0 8px 20px rgba(185, 49, 49, 0.2);
+        }
+
+        /* Section text colors */
+        .menu-grid article h3 {
+            color: #b93131;
+            font-family: "Comfortaa", sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+    .menu-grid ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-grid li {
+        margin-bottom: 0.4rem;
+        font-size: 0.95rem;
+        color: #444;
+    }
+
+/* Scroll fade animation */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 }
 
     /* ---- individual category boxes ---- */
