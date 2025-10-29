@@ -258,6 +258,47 @@ section {
         color: var(--warm-gold);
     }
 
+/* --- About: layout control --- */
+@media (min-width: 900px) {
+    .about-content {
+        flex-wrap: nowrap;
+        flex-direction: row; /* image left, text right */
+        align-items: flex-start;
+        gap: 2.5rem;
+    }
+
+    .about-photo {
+        flex: 0 0 auto;
+    }
+
+        .about-photo img {
+            width: 340px;
+        }
+    /* fixed visual anchor */
+    .about-text {
+        flex: 1;
+    }
+    /* let text fill the rest */
+}
+
+@media (max-width: 899px) {
+    .about-content {
+        flex-direction: column; /* stack on phones */
+        align-items: center;
+        text-align: center;
+    }
+
+    .about-photo img {
+        width: 260px;
+    }
+    /* smaller image for mobile */
+    .about-text {
+        text-align: left;
+    }
+    /* keep paragraphs readable */
+}
+
+
 /* ---------- MEAL PREP (toggle) ---------- */
 .mealprep {
     background: transparent;
@@ -505,6 +546,21 @@ section {
         border-radius: 12px;
         box-shadow: 0 0 25px rgba(0,0,0,.6);
     }
+
+@media (max-width: 600px) {
+    .gallery-grid-portrait {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 8px;
+    }
+}
+
+/* (Optional) super small devices */
+@media (max-width: 380px) {
+    .gallery-grid-portrait {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 6px;
+    }
+}
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 992px) {
