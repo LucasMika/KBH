@@ -867,3 +867,18 @@ section h2 {
     border-color: var(--velvet-red); /* still shows that subtle red accent */
     transform: translateY(-6px);
 }
+
+
+/* ✨ dotted dividers inside each Meal Prep box */
+.mealprep .service-card ul li {
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.15);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+    /* remove the last dotted line in each box */
+    .mealprep .service-card ul li:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
