@@ -176,3 +176,29 @@ function ui(el, text, cls) {
     console.log("[ServiceCheck] handler bound");
   });
 })();
+
+
+/* =========================================================
+   SCROLL FADE-IN for Meal Prep Menu (Staggered)
+   ========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".menu-grid article");
+
+    function revealOnScroll() {
+        const triggerBottom = window.innerHeight * 0.85;
+        let delay = 0;
+
+        items.forEach((item) => {
+            const boxTop = item.getBoundingClientRect().top;
+            if (boxTop < triggerBottom && !item.classList.contains("visible")) {
+                item.classList.add("visible");
+                // stagger delay per visible item
+                item.style.animationDelay = `${delay}s`;
+                delay += 0.15; // adjust spacing between fades
+            }
+        });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
+});
