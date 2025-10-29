@@ -916,77 +916,122 @@ section {
 
 /*
 =========================================================
-  NEW GALLERY STYLES (Adjusted for Portrait Images)
+  CAROUSEL GALLERY STYLES
 =========================================================
 */
 
 .gallery-showcase {
-    padding: 0 1rem;
+    padding: 0 6vw; /* Match main padding, but gallery-carousel handles inner margin */
     margin-bottom: 5rem;
 }
 
-.gallery-grid {
-    display: grid;
-    /* Create a responsive grid with minimum column size of 150px (phones) to 250px (desktops) */
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
+.gallery-carousel {
     max-width: var(--max-content-width);
     margin: 0 auto;
+    position: relative; /* For arrow positioning */
+    display: flex;
+    align-items: center;
 }
 
+/* Scroll Arrows */
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    border: none;
+    background: rgba(32, 22, 22, 0.75);
+    color: var(--text-primary);
+    font-size: 2rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-radius: 999px;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.75;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+    .scroll-arrow:hover {
+        background: var(--velvet-red);
+        opacity: 1;
+    }
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+/* Gallery Container (The actual scrolling window) */
+.gallery-grid {
+    display: flex;
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Snap to each item after scroll */
+    gap: 1rem;
+    padding: 1rem; /* Padding for the shadow and arrows */
+    -webkit-overflow-scrolling: touch; /* Better scrolling on iOS */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    margin: 0 -1rem; /* Counteract inner padding for full width on max-content */
+}
+
+    /* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+    .gallery-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+
 .gallery-item {
+    scroll-snap-align: start; /* Snap point for each item */
+    flex: 0 0 auto; /* Prevent items from shrinking/growing */
     display: block;
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* ADJUSTED: Taller fixed height for a portrait-friendly aspect ratio (e.g., 3:4) */
-    height: 200px; /* Taller fixed height for thumbnail on mobile */
-    background-color: var(--deep-chocolate); /* Background for letterboxing if image isn't full height */
+    /* WIDTH: Control how many images fit on the screen */
+    width: calc(50% - 0.5rem); /* 2 items visible + half a gap on mobile */
+    /* HEIGHT: Taller fixed height for a portrait-friendly aspect ratio (e.g., 3:4) */
+    height: 200px;
+    background-color: var(--deep-chocolate);
 }
 
     .gallery-item:hover {
-        transform: scale(1.03);
+        transform: translateY(-4px); /* Vertical lift hover for depth */
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
     .gallery-item img {
         width: 100%;
         height: 100%;
-        /* ADJUSTMENT: Adding border-radius to the image itself */
         border-radius: 8px;
-        /* Change 'cover' to 'contain' to ensure the entire portrait image is visible */
         object-fit: contain;
         transition: transform 0.4s ease;
     }
 
     .gallery-item:hover img {
-        /* Keep the hover effect subtle when using contain */
         transform: scale(1.05);
     }
 
 
-/* Adjust grid for tablets */
+/* Responsive adjustments for the carousel items */
 @media (min-width: 600px) {
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-
     .gallery-item {
-        /* ADJUSTED: Increase height further for tablet/desktop */
+        width: calc(33.333% - 0.666rem); /* 3 items visible + gaps on tablet */
         height: 260px;
     }
 }
 
-/* Adjust grid for larger screens */
 @media (min-width: 1000px) {
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-
     .gallery-item {
-        /* ADJUSTED: Final increase in height for large screens */
+        width: calc(25% - 0.75rem); /* 4 items visible + gaps on desktop */
         height: 320px;
     }
 }

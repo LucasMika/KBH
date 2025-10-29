@@ -17,7 +17,11 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
         const targetId = this.getAttribute("href");
         if (targetId.startsWith("#")) {
-            e.preventDefault();
+            // Allow the gallery close link (#gallery) to function without smooth scrolling
+            if (targetId !== "#gallery") {
+                e.preventDefault();
+            }
+
             const section = document.querySelector(targetId);
             if (section) {
                 section.scrollIntoView({ behavior: "smooth" });
@@ -243,5 +247,48 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener("scroll", revealOnScroll);
         // Do NOT call revealOnScroll initially since the menu is hidden.
         // revealOnScroll(); 
+    }
+});
+
+
+/* =========================================================
+   CAROUSEL GALLERY SCROLL LOGIC
+   ========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+    const scrollContainer = document.getElementById('scroll-container');
+    const leftArrow = document.getElementById('left-arrow');
+    const rightArrow = document.getElementById('right-arrow');
+
+    if (scrollContainer && leftArrow && rightArrow) {
+        const itemWidth = scrollContainer.querySelector('.gallery-item').offsetWidth;
+        const gap = 16; // 1rem gap defined in CSS
+
+        // Scroll amount is one item width plus the gap
+        const scrollAmount = itemWidth + gap;
+
+        // Function to scroll the carousel
+        const scrollCarousel = (direction) => {
+            if (direction === 'left') {
+                scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else if (direction === 'right') {
+                scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        };
+
+        leftArrow.addEventListener('click', () => scrollCarousel('left'));
+        rightArrow.addEventListener('click', () => scrollCarousel('right'));
+
+        // Optional: Hide arrows if content doesn't need scrolling (e.g., all images fit)
+        // Note: This check can be tricky due to dynamic widths, but a basic check is:
+        const checkScroll = () => {
+            const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+            leftArrow.style.display = scrollContainer.scrollLeft > 0 ? 'flex' : 'none';
+            rightArrow.style.display = scrollContainer.scrollLeft < maxScroll - 1 ? 'flex' : 'none';
+        };
+
+        // Check initially and on scroll/resize
+        checkScroll();
+        scrollContainer.addEventListener('scroll', checkScroll);
+        window.addEventListener('resize', checkScroll);
     }
 });
