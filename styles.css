@@ -935,6 +935,7 @@ section {
 }
 
 .gallery-item {
+    border-radius: 8px;
     display: block;
     overflow: hidden;
     border-radius: 8px;
@@ -947,11 +948,13 @@ section {
 }
 
     .gallery-item:hover {
+        border-radius: 0px;
         transform: scale(1.03);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
     .gallery-item img {
+        border-radius: 8px;
         width: 100%;
         height: 100%;
         /* ADJUSTED: Change 'cover' to 'contain' to ensure the entire portrait image is visible */
