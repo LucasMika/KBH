@@ -916,3 +916,157 @@ section {
         margin-bottom: 0;
         padding-bottom: 0;
     }
+
+
+/*
+=========================================================
+  NEW GALLERY STYLES
+=========================================================
+*/
+
+.gallery-showcase {
+    padding: 0 1rem;
+    margin-bottom: 5rem;
+}
+
+.gallery-grid {
+    display: grid;
+    /* Create a responsive grid with minimum column size of 150px (phones) to 250px (desktops) */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+}
+
+.gallery-item {
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Ensure all images are the same height and fill the container */
+    height: 150px; /* fixed height for thumbnail */
+}
+
+    .gallery-item:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Crop image to fill the item */
+        transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.08);
+    }
+
+
+/* Adjust grid for tablets */
+@media (min-width: 600px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .gallery-item {
+        height: 200px; /* Taller items on wider screens */
+    }
+}
+
+/* Adjust grid for larger screens */
+@media (min-width: 1000px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .gallery-item {
+        height: 250px; /* Taller items on wider screens */
+    }
+}
+
+
+/*
+=========================================================
+  CSS LIGHTBOX MODAL (for image expansion)
+=========================================================
+*/
+.gallery-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95); /* Very dark overlay */
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    backdrop-filter: blur(8px);
+}
+
+    /* Modal appears when the anchor's ID matches the URL hash (#img1) */
+    .gallery-modal:target {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90%;
+    max-height: 90%;
+    background: var(--deep-chocolate);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    padding: 1.5rem;
+    position: relative;
+}
+
+    .modal-content img {
+        max-width: 100%;
+        max-height: 75vh;
+        height: auto;
+        border-radius: 8px;
+        object-fit: contain;
+    }
+
+    .modal-content p {
+        margin-top: 1rem;
+        font-style: italic;
+        color: var(--text-secondary);
+        text-align: center;
+        font-size: 1rem;
+    }
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+    .modal-close:hover {
+        opacity: 1;
+        color: var(--velvet-red);
+    }
+
+/* Prevent body scrolling when modal is open */
+.gallery-modal:target body {
+    overflow: hidden;
+}
