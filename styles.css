@@ -651,7 +651,7 @@ section h2 {
 
     /* Match the Curated Culinary Experiences card look */
     .menu-grid article {
-        background: #fffaf7;
+        background: #fff3ef; /* richer warm tone like the Services cards */
         border: 2px solid #b93131;
         border-radius: 1rem;
         padding: 1.5rem;
@@ -660,6 +660,7 @@ section h2 {
         opacity: 0;
         transform: translateY(25px);
     }
+
 
         .menu-grid article.visible {
             animation: fadeUp 0.8s ease forwards;
