@@ -654,6 +654,14 @@ section h2 {
         font-family: "Comfortaa", sans-serif;
         margin-bottom: 0.5rem;
     }
+    .menu-grid article {
+        background: rgba(255, 250, 247, 0.7);
+        border-radius: 1rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        padding: 1.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
 
     .menu-grid ul {
         list-style: none;
