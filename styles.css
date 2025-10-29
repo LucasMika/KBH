@@ -624,7 +624,7 @@ section h2 {
 
 /* ---------- MEAL PREP MENU SECTION ---------- */
 .mealprep {
-    background: #fffaf7;
+    background: transparent;
     padding: 4rem 1.5rem;
     text-align: center;
 }
@@ -649,20 +649,36 @@ section h2 {
     text-align: left;
 }
 
-    .menu-grid article h3 {
-        color: #b93131;
-        font-family: "Comfortaa", sans-serif;
-        margin-bottom: 0.5rem;
-    }
+    /* ---- individual category boxes ---- */
     .menu-grid article {
         background: rgba(255, 250, 247, 0.7);
         border-radius: 1rem;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
         padding: 1.5rem;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+        opacity: 0;
+        transform: translateY(25px);
     }
 
+        .menu-grid article.visible {
+            animation: fadeUp 0.8s ease forwards;
+        }
 
+        /* hover effect */
+        .menu-grid article:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 250, 247, 0.9);
+        }
+
+        /* headings inside each box */
+        .menu-grid article h3 {
+            color: #b93131;
+            font-family: "Comfortaa", sans-serif;
+            margin-bottom: 0.5rem;
+        }
+
+    /* list styles */
     .menu-grid ul {
         list-style: none;
         padding: 0;
@@ -674,6 +690,20 @@ section h2 {
         font-size: 0.95rem;
         color: #444;
     }
+
+/* animation keyframes */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 
 /* ---------- SCROLL FADE-IN (staggered animation) ---------- */
