@@ -24,39 +24,16 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         }
     });
 });
-
-// ---------- CONTACT FORM HANDLING ----------
+// ---------- CONTACT FORM (native post) ----------
 const form = document.querySelector("form.contact-form");
 if (form) {
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const formData = new FormData(form);
+    form.addEventListener("submit", () => {
         const resultEl = document.querySelector(".form-feedback");
         if (resultEl) {
             resultEl.textContent = "Sending…";
             resultEl.className = "form-feedback pending";
         }
-        try {
-            const response = await fetch("https://api.web3forms.com/submit", {
-                method: "POST",
-                body: formData,
-            });
-            if (response.ok) {
-                if (resultEl) {
-                    resultEl.textContent = "Message sent successfully!";
-                    resultEl.className = "form-feedback success";
-                }
-                form.reset();
-            } else {
-                throw new Error("Submission failed.");
-            }
-        } catch (err) {
-            console.error(err);
-            if (resultEl) {
-                resultEl.textContent = "An error occurred. Please try again.";
-                resultEl.className = "form-feedback error";
-            }
-        }
+        // no preventDefault — allow native POST to Web3Forms
     });
 }
 
