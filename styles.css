@@ -551,10 +551,6 @@ section {
         text-align: center;
     }
 
-    .about-text {
-        text-align: center;
-    }
-
     .about-photo img {
         width: 260px;
     }
@@ -920,7 +916,7 @@ section {
 
 /*
 =========================================================
-  NEW GALLERY STYLES
+  NEW GALLERY STYLES (Adjusted for Portrait Images)
 =========================================================
 */
 
@@ -945,8 +941,9 @@ section {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* Ensure all images are the same height and fill the container */
-    height: 150px; /* fixed height for thumbnail */
+    /* ADJUSTED: Taller fixed height for a portrait-friendly aspect ratio (e.g., 3:4) */
+    height: 200px; /* Taller fixed height for thumbnail on mobile */
+    background-color: var(--deep-chocolate); /* Background for letterboxing if image isn't full height */
 }
 
     .gallery-item:hover {
@@ -957,12 +954,14 @@ section {
     .gallery-item img {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* Crop image to fill the item */
+        /* ADJUSTED: Change 'cover' to 'contain' to ensure the entire portrait image is visible */
+        object-fit: contain;
         transition: transform 0.4s ease;
     }
 
     .gallery-item:hover img {
-        transform: scale(1.08);
+        /* Keep the hover effect subtle when using contain */
+        transform: scale(1.05);
     }
 
 
@@ -973,7 +972,8 @@ section {
     }
 
     .gallery-item {
-        height: 200px; /* Taller items on wider screens */
+        /* ADJUSTED: Increase height further for tablet/desktop */
+        height: 260px;
     }
 }
 
@@ -984,7 +984,8 @@ section {
     }
 
     .gallery-item {
-        height: 250px; /* Taller items on wider screens */
+        /* ADJUSTED: Final increase in height for large screens */
+        height: 320px;
     }
 }
 
@@ -1036,6 +1037,7 @@ section {
         max-height: 75vh;
         height: auto;
         border-radius: 8px;
+        /* Keep object-fit: contain for the modal to ensure the full large image is visible */
         object-fit: contain;
     }
 
