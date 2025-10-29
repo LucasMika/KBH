@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* =========================================================
-   CAROUSEL GALLERY SCROLL LOGIC
+   CAROUSEL GALLERY SCROLL LOGIC (Looping)
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
     const scrollContainer = document.getElementById('scroll-container');
@@ -260,35 +260,52 @@ document.addEventListener("DOMContentLoaded", () => {
     const rightArrow = document.getElementById('right-arrow');
 
     if (scrollContainer && leftArrow && rightArrow) {
-        const itemWidth = scrollContainer.querySelector('.gallery-item').offsetWidth;
-        const gap = 16; // 1rem gap defined in CSS
+        // Calculate item width dynamically (including margin/gap will be more complex due to responsive width,
+        // so we will rely on the scroll-snap behavior which is already in CSS)
 
-        // Scroll amount is one item width plus the gap
-        const scrollAmount = itemWidth + gap;
+        // Determine how far to scroll (1 item)
+        const getScrollAmount = () => {
+            const firstItem = scrollContainer.querySelector('.gallery-item');
+            if (!firstItem) return 0;
+            // Get the width of one item + its right margin/gap (assuming gap is 1rem = 16px)
+            const itemWidth = firstItem.offsetWidth;
+            const gap = 16;
+            return itemWidth + gap;
+        };
 
         // Function to scroll the carousel
         const scrollCarousel = (direction) => {
+            const scrollAmount = getScrollAmount();
+
             if (direction === 'left') {
-                scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                const currentScroll = scrollContainer.scrollLeft;
+
+                if (currentScroll === 0) {
+                    // Loop from start to end
+                    scrollContainer.scrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+                } else {
+                    // Scroll one step left
+                    scrollContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                }
+
             } else if (direction === 'right') {
-                scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
+                const currentScroll = scrollContainer.scrollLeft;
+
+                // Use a small buffer (e.g., 2px) for floating point comparison issues
+                if (currentScroll >= maxScroll - 2) {
+                    // Loop from end back to start
+                    scrollContainer.scrollLeft = 0;
+                } else {
+                    // Scroll one step right
+                    scrollContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
             }
         };
 
         leftArrow.addEventListener('click', () => scrollCarousel('left'));
         rightArrow.addEventListener('click', () => scrollCarousel('right'));
 
-        // Optional: Hide arrows if content doesn't need scrolling (e.g., all images fit)
-        // Note: This check can be tricky due to dynamic widths, but a basic check is:
-        const checkScroll = () => {
-            const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth;
-            leftArrow.style.display = scrollContainer.scrollLeft > 0 ? 'flex' : 'none';
-            rightArrow.style.display = scrollContainer.scrollLeft < maxScroll - 1 ? 'flex' : 'none';
-        };
-
-        // Check initially and on scroll/resize
-        checkScroll();
-        scrollContainer.addEventListener('scroll', checkScroll);
-        window.addEventListener('resize', checkScroll);
+        // Removed `checkScroll` as the carousel is now looping and arrows are always active.
     }
 });
