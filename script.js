@@ -260,3 +260,23 @@ document.addEventListener("DOMContentLoaded", () => {
 // which is more performant than JavaScript manipulation. The scroll arrows
 // (left-arrow, right-arrow) have been removed from the HTML.
 // The code block that was here has been removed.
+
+
+/* =========================================================
+PORTRAIT GALLERY LIGHTBOX
+========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+    const lightbox = document.getElementById("lightbox");
+    const imgs = document.querySelectorAll(".gallery-grid-portrait img");
+
+    imgs.forEach(img => {
+        img.addEventListener("click", () => {
+            lightbox.classList.add("active");
+            lightbox.querySelector("img").src = img.src;
+        });
+    });
+
+    lightbox.addEventListener("click", () => {
+        lightbox.classList.remove("active");
+    });
+});

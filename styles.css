@@ -1105,3 +1105,49 @@ section {
 .gallery-modal:target body {
     overflow: hidden;
 }
+/* ---------- CLEAN PORTRAIT GALLERY ---------- */
+.gallery-grid-portrait {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+    .gallery-grid-portrait img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        aspect-ratio: 3/4; /* keeps portrait feel */
+    }
+
+        .gallery-grid-portrait img:hover {
+            transform: scale(1.04);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        }
+
+/* Lightbox overlay */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+    .lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 12px;
+        box-shadow: 0 0 25px rgba(0,0,0,0.6);
+    }
+
+    .lightbox.active {
+        display: flex;
+    }
