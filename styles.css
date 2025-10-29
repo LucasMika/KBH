@@ -858,3 +858,12 @@ section h2 {
 .mealprep .menu-grid li {
     color: var(--text-secondary);
 }
+
+
+/* Fix: stop Meal Prep cards from turning white on hover */
+.mealprep .service-card:hover,
+.mealprep .service-card:focus-within {
+    background: rgba(32, 22, 22, 0.75) !important; /* same as non-hover state */
+    border-color: var(--velvet-red); /* still shows that subtle red accent */
+    transform: translateY(-6px);
+}
