@@ -1,257 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="icon.ico" />
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Savory Creations</title>
-
-    <!-- Fonts / Favicon -->
+    <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="icon.ico" />
-
-    <link rel="stylesheet" href="styles.css" />
-</head>
-
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <header class="site-header">
-        <div class="logo-wrap">
-            <img src="/assets/birdlogosmall.webp" alt="Savory Creations pepper and garlic mark" class="logo" />
-            <div class="brand-text">
-                <h1>Savory Creations</h1>
-                <p>Personal Chef Services</p>
-            </div>
+      <div class="logo-wrap">
+        <img src="/assets/birdlogosmall.webp" alt="Savory Creations pepper and garlic mark" class="logo" />
+        <div class="brand-text">
+          <h1>Savory Creations</h1>
+          <p>Personal Chef Services</p>
         </div>
-
-        <nav class="main-nav" id="site-navigation">
-            <a href="#services">Services</a>
-            <a href="#about">About Me</a>
-            <a href="#where">Service Area</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#contact">Contact</a>
-        </nav>
-
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
-            <span></span><span></span><span></span>
-        </button>
+      </div>
+      <nav class="main-nav" id="site-navigation">
+        <a href="#services">Services</a>
+        <a href="#about">About Me</a>
+        <a href="#where">Service Area</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+        <span></span><span></span><span></span>
+      </button>
     </header>
 
     <main>
-        <!-- HERO -->
-        <section class="hero" id="top">
-            <div class="hero-content">
-                <h2>Savor memorable meals crafted just for you.</h2>
-                <p>From intimate dinners to elevated weekly meal prep, Savory Creations brings restaurant-quality dining to the comfort of your home.</p>
-                <a href="#contact" class="cta-button">Plan Your Next Event</a>
-            </div>
-        </section>
+      <section class="hero" id="top">
+        <div class="hero-content">
+          <h2>Savor memorable meals crafted just for you.</h2>
+          <p>
+            From intimate dinners to elevated weekly meal prep, Savory Creations brings
+            restaurant-quality dining to the comfort of your home.
+          </p>
+          <a href="#contact" class="cta-button">Plan Your Next Event</a>
+        </div>
+      </section>
 
-        <!-- SERVICES -->
-        <section class="services" id="services">
-            <h2>Curated Culinary Experiences</h2>
-            <div class="service-grid">
-                <article class="service-card">
-                    <h3>Private Dining</h3>
-                    <p>Impress your guests with multi-course menus prepared and plated in your own kitchen.</p>
-                </article>
-                <article class="service-card">
-                    <h3>Weekly Meal Prep</h3>
-                    <p>Customized, ready-to-enjoy meals that nourish your week without sacrificing flavor.</p>
-                </article>
-                <article class="service-card">
-                    <h3>Celebration Catering</h3>
-                    <p>Celebrate milestones with tailored spreads that reflect your story and tastes.</p>
-                </article>
-            </div>
-        </section>
+      <section class="services" id="services">
+        <h2>Curated Culinary Experiences</h2>
+        <div class="service-grid">
+          <article class="service-card">
+            <h3>Private Dining</h3>
+            <p>Impress your guests with multi-course menus prepared and plated in your own kitchen.</p>
+          </article>
+          <article class="service-card">
+            <h3>Weekly Meal Prep</h3>
+            <p>Customized, ready-to-enjoy meals that nourish your week without sacrificing flavor.</p>
+          </article>
+          <article class="service-card">
+            <h3>Celebration Catering</h3>
+            <p>Celebrate milestones with tailored spreads that reflect your story and tastes.</p>
+          </article>
+        </div>
+      </section>
 
-        <!-- MEAL PREP (toggle reveal) -->
-        <section class="mealprep" id="mealprep">
-            <h2>Meal Prep Sample Menu</h2>
-            <p class="section-intro">
-                Here’s a glimpse at some of the meal prep dishes I’ve created — balanced, flavorful, and designed
-                to fit busy lifestyles while keeping nutrition and taste in harmony.
-            </p>
+      <section class="about" id="about">
+  <h2>About Me</h2>
 
-            <button id="toggle-menu-button" class="cta-button" style="margin-bottom: 3rem;">Show Menu Selections</button>
+  <div class="about-content">
+    <figure class="about-photo">
+      <img src="assets/Kbird.jpg" alt="Chef Katie Bird" />
+    </figure>
 
-            <div id="menu-toggle-container">
-                <div class="menu-grid">
-                    <article class="service-card">
-                        <h3>Chicken</h3>
-                        <ul>
-                            <li>Seared Italian chicken breast with a seasonal roasted veggie medley.</li>
-                            <li>Fried chicken cutlets with tomato basil sauce on pasta and a side salad.</li>
-                            <li>White Chicken chili with northern beans and veggies.</li>
-                            <li>Orange chicken with veggie fried rice.</li>
-                            <li>Pulled chicken tacos with tropical salsa and tortilla chips.</li>
-                            <li>Butter Chicken with seasoned rice and cucumber salad.</li>
-                        </ul>
-                    </article>
+    <div class="about-text">
+      <p>
+        Hello. I’m <strong>Katie Bird</strong>—the founder and Chef of <strong>Savory Creations</strong>.
+        I am dedicated to providing nutritious and flavorful meals that will give you more time to do
+        the things you love and less time stressing about what you will eat.
+      </p>
+      <p>
+        From grocery shopping to cooking and packaging, I handle every step, ensuring that
+        seasonal ingredients take center stage—because quality and taste will always shine through.
+        By working closely with you, I develop recipes catered to your needs, regardless of dietary
+        restrictions or personal preferences. I’m always willing to adapt to fit your lifestyle best.
+      </p>
+      <p>
+        My goal is to reach those with busy lives who want balanced, delicious meals but lack the time
+        to make them—or those who simply want to learn how to eat well without sacrificing flavor.
+      </p>
+      <p>
+        I believe that food is one of the few things in life that truly connects everyone.
+        Letting me take over the cooking means you get more time to connect with the people
+        you love—or maybe even start that new passion project.
+      </p>
+    </div>
+  </div>
+</section>
 
-                    <article class="service-card">
-                        <h3>Pork</h3>
-                        <ul>
-                            <li>Oven-roasted pork chops with maple glaze, mashed potatoes, and sautéed green beans.</li>
-                            <li>Ramen noodles with pork belly and corn.</li>
-                            <li>Pork kebabs with pineapple and bell peppers with a veggie stir-fry.</li>
-                            <li>BBQ pulled pork sliders with creamy macaroni salad.</li>
-                            <li>BLT chopped salad sub with sweet potato hash.</li>
-                            <li>Pork curry with bell peppers, peas, onions, and coconut rice.</li>
-                        </ul>
-                    </article>
+<section class="gallery" id="gallery-grid">
+  <h2>Our Culinary Showcase</h2>
+  
+  <div class="image-grid-gallery">
+    <img src="assets/dish-1.webp" alt="Gourmet Plated Salmon" />
+    <img src="assets/dish-2.webp" alt="Freshly Baked Artisan Bread" />
+    <img src="assets/dish-3.webp" alt="Truffle Pasta Dish" />
+    <img src="assets/dish-4.webp" alt="Colorful Roasted Vegetables" />
+    <img src="assets/dish-5.webp" alt="Dessert Tart with Berries" />
+    <img src="assets/dish-6.webp" alt="Grilled Steak with Asparagus" />
+  </div>
+  </section>
 
-                    <article class="service-card">
-                        <h3>Beef</h3>
-                        <ul>
-                            <li>Steak with garlic-roasted mashed potatoes and roasted carrots.</li>
-                            <li>Beef burrito casserole with fresh guacamole and salsa.</li>
-                            <li>Teriyaki beef with sautéed corn and peppers.</li>
-                            <li>Beef bolognese with pasta and Caesar salad.</li>
-                            <li>Spicy beef with roasted baby potatoes and zucchini.</li>
-                            <li>Beef stroganoff with noodles and stewed tomatoes.</li>
-                        </ul>
-                    </article>
 
-                    <article class="service-card">
-                        <h3>Fish / Shellfish</h3>
-                        <ul>
-                            <li>Creamy Nordic cod soup with leeks and onion.</li>
-                            <li>Pan-seared salmon with lemon herb sauce and roasted cherry tomato salad.</li>
-                            <li>Tilapia with sautéed broccolini and cauliflower.</li>
-                            <li>Shrimp and sausage jambalaya.</li>
-                            <li>Oven-baked walleye with creamy white sauce and steamed veggies.</li>
-                            <li>Honey garlic glazed salmon rice bowls with peas and carrots.</li>
-                        </ul>
-                    </article>
+<section class="gallery" id="gallery-carousel">
+  <h2>Gallery Carousel Preview</h2>
+  
+  <div class="carousel-container">
+    <div class="carousel-track">
+      <img src="assets/dish-1.webp" alt="Gourmet Plated Salmon" class="carousel-slide" />
+      <img src="assets/dish-2.webp" alt="Freshly Baked Artisan Bread" class="carousel-slide" />
+      <img src="assets/dish-3.webp" alt="Truffle Pasta Dish" class="carousel-slide" />
+      <img src="assets/dish-4.webp" alt="Colorful Roasted Vegetables" class="carousel-slide" />
+      <img src="assets/dish-5.webp" alt="Dessert Tart with Berries" class="carousel-slide" />
+      <img src="assets/dish-6.webp" alt="Grilled Steak with Asparagus" class="carousel-slide" />
+    </div>
+    
+    <button class="carousel-button prev" aria-label="Previous image">&#10094;</button>
+    <button class="carousel-button next" aria-label="Next image">&#10095;</button>
+    
+    <div class="carousel-dots">
+      </div>
+  </div>
+  </section>
 
-                    <article class="service-card">
-                        <h3>Vegetarian</h3>
-                        <ul>
-                            <li>Roasted veggie and quinoa bowls.</li>
-                            <li>Steamed tofu with spicy chili sauce and sautéed veggies.</li>
-                            <li>Lentil soup with carrots, peppers, onion, and potatoes.</li>
-                            <li>Chickpea salad with Italian vinaigrette.</li>
-                            <li>Pasta primavera with seasonal veggies.</li>
-                            <li>Eggplant lasagna with side salad.</li>
-                        </ul>
-                    </article>
-                </div>
-            </div>
-        </section>
+<section class="service-check" id="where">
+  <h2>My Service Area</h2>
+  <p class="service-note">I currently serve the Lakeshore and greater Grand Rapids area.</p>
 
-        <!-- GALLERY (optimized portrait grid + lightbox) -->
-        <section class="gallery-showcase" id="gallery">
-            <h2>Culinary Showcase</h2>
-            <p class="section-intro" style="max-width:700px;margin:-1rem auto 3rem;color:var(--text-secondary);font-size:1.1rem;text-align:center;">
-                A selection of dishes and presentations crafted for past clients.
-            </p>
+  <div class="checker">
+    <button id="check-my-location" class="cta-button">Use My Location</button>
+    <p id="check-result" class="check-result" aria-live="polite"></p>
+  </div>
+</section>
 
-            <div class="gallery-grid-portrait">
-                <img src="assets/gallery/one.jpg" alt="Seared salmon dish with vegetables" loading="lazy">
-                <img src="assets/gallery/two.jpg" alt="Dessert plating with berries" loading="lazy">
-                <img src="assets/gallery/three.jpg" alt="Beef stew in a rustic bowl" loading="lazy">
-                <img src="assets/gallery/four.jpg" alt="Weekly meal prep containers" loading="lazy">
-                <img src="assets/gallery/five.jpg" alt="Plated pasta with garnish" loading="lazy">
-                <img src="assets/gallery/six.jpg" alt="Breakfast omelet with herbs" loading="lazy">
-                <img src="assets/gallery/seven.jpg" alt="Vibrant vegetable stir-fry" loading="lazy">
-                <img src="assets/gallery/eight.jpg" alt="Perfectly grilled ribs" loading="lazy">
-            </div>
 
-            <div class="lightbox" id="lightbox">
-                <img src="" alt="">
-            </div>
-        </section>
 
-        <!-- ABOUT -->
-        <section class="about" id="about">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <figure class="about-photo">
-                    <img src="assets/Kbird.jpg" alt="Chef Katie Bird" />
-                </figure>
-                <div class="about-text">
-                    <p>Hello. I’m <strong>Katie Bird</strong>—the founder and Chef of <strong>Savory Creations</strong>. I am dedicated to providing nutritious and flavorful meals that will give you more time to do the things you love and less time stressing about what you will eat.</p>
-                    <p>From grocery shopping to cooking and packaging, I handle every step, ensuring that seasonal ingredients take center stage—because quality and taste will always shine through. By working closely with you, I develop recipes catered to your needs, regardless of dietary restrictions or personal preferences. I’m always willing to adapt to fit your lifestyle best.</p>
-                    <p>My goal is to reach those with busy lives who want balanced, delicious meals but lack the time to make them—or those who simply want to learn how to eat well without sacrificing flavor.</p>
-                    <p>I believe that food is one of the few things in life that truly connects everyone. Letting me take over the cooking means you get more time to connect with the people you love—or maybe even start that new passion project.</p>
-                </div>
-            </div>
-        </section>
+      <section class="testimonials" id="testimonials">
+        <h2>What My Clients Say</h2>
+        <div class="testimonial-grid">
+          <figure>
+            <blockquote>“Every bite felt like a celebration. The attention to detail was unmatched.”</blockquote>
+            <figcaption>— Morgan L.</figcaption>
+          </figure>
+          <figure>
+            <blockquote>“Our anniversary dinner at home outshone any restaurant experience we’ve had.”</blockquote>
+            <figcaption>— Priya & Ethan</figcaption>
+          </figure>
+          <figure>
+            <blockquote>“Savory Creations transformed weeknight dinners into moments we look forward to.”</blockquote>
+            <figcaption>— The Ramirez Family</figcaption>
+          </figure>
+        </div>
+      </section>
 
-        <!-- SERVICE AREA -->
-        <section class="service-check" id="where">
-            <h2>My Service Area</h2>
-            <p class="service-note">I currently serve the Lakeshore and greater Grand Rapids area.</p>
-            <div class="checker">
-                <button id="check-my-location" class="cta-button">Use My Location</button>
-                <p id="check-result" class="check-result" aria-live="polite"></p>
-            </div>
-        </section>
+      <section class="contact" id="contact">
+        <h2>Let’s Cook Something Memorable</h2>
 
-        <!-- TESTIMONIALS -->
-        <section class="testimonials" id="testimonials">
-            <h2>What My Clients Say</h2>
-            <div class="testimonial-grid">
-                <figure>
-                    <blockquote>“Every bite felt like a celebration. The attention to detail was unmatched.”</blockquote>
-                    <figcaption>— Morgan L.</figcaption>
-                </figure>
-                <figure>
-                    <blockquote>“Our anniversary dinner at home outshone any restaurant experience we’ve had.”</blockquote>
-                    <figcaption>— Priya & Ethan</figcaption>
-                </figure>
-                <figure>
-                    <blockquote>“Savory Creations transformed weeknight dinners into moments we look forward to.”</blockquote>
-                    <figcaption>— The Ramirez Family</figcaption>
-                </figure>
-            </div>
-        </section>
+       <form
+  class="contact-form"
+  action="https://api.web3forms.com/submit"
+  method="POST"
+>
+  <input type="hidden" name="access_key" value="1c4cb6de-61d4-43f3-9584-e344cda116a9" />
+  <input type="hidden" name="subject" value="Savory Creations Inquiry" />
+  <input type="hidden" name="redirect" value="https://justdoodlelovewebsite.onrender.com/thank-you.html" />
 
-        <!-- CONTACT -->
-        <section class="contact" id="contact">
-            <h2>Let’s Cook Something Memorable</h2>
-            <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="1c4cb6de-61d4-43f3-9584-e344cda116a9" />
-                <input type="hidden" name="subject" value="Savory Creations Inquiry" />
-                <input type="hidden" name="redirect" value="https://justdoodlelovewebsite.onrender.com/thank-you.html" />
+  <div class="field">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" placeholder="Your name" required />
+  </div>
 
-                <div class="field">
-                    <label for="name">Name</label>
-                    <input id="name" name="name" type="text" placeholder="Your name" required />
-                </div>
+  <div class="field">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="you@example.com" required />
+  </div>
 
-                <div class="field">
-                    <label for="email">Email</label>
-                    <input id="email" name="email" type="email" placeholder="you@example.com" required />
-                </div>
+  <div class="field">
+    <label for="event">Event Date</label>
+    <input type="date" id="event" name="event" />
+  </div>
 
-                <div class="field">
-                    <label for="event">Event Date</label>
-                    <input id="event" name="event" type="date" />
-                </div>
+  <div class="field">
+    <label for="message">Tell us about your vision</label>
+    <textarea id="message" name="message" rows="4" placeholder="Share flavors, guests, and special notes"></textarea>
+  </div>
 
-                <div class="field">
-                    <label for="message">Tell us about your vision</label>
-                    <textarea id="message" name="message" rows="4" placeholder="Share flavors, guests, and special notes"></textarea>
-                </div>
+  <button type="submit">Request a Consultation</button>
+</form>
 
-                <button type="submit">Request a Consultation</button>
-                <!-- Optional live feedback node (script checks existence) -->
-                <div class="form-feedback" aria-live="polite"></div>
-            </form>
-        </section>
+      
+
+      </section>
     </main>
 
     <footer class="site-footer">
-        <p>© <span id="year"></span> Savory Creations. Crafted with heart in every kitchen.</p>
+      <p>© <span id="year"></span> Savory Creations. Crafted with heart in every kitchen.</p>
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        // Set dynamic year
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
-</body>
+  </body>
 </html>
