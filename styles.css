@@ -626,32 +626,11 @@ section h2 {
   margin-bottom: 5rem;
 }
 
-/* --- OPTION 1: Image Grid --- */
-.image-grid-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
-  padding: 0 1rem;
-}
-
-.image-grid-gallery img {
-  width: 100%;
-  height: 250px; /* Uniform height for grid */
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
-}
-
-.image-grid-gallery img:hover {
-  transform: scale(1.03);
-}
-
 /* --- OPTION 2: Scrolling Carousel --- */
 .carousel-container {
   position: relative;
   overflow: hidden;
-  max-width: 900px;
+  max-width: 650px; /* Further narrowed max-width for stronger portrait feel */
   margin: 0 auto;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
@@ -664,7 +643,7 @@ section h2 {
 
 .carousel-slide {
   min-width: 100%;
-  height: 400px; /* Set a fixed height for the carousel */
+  height: 580px; /* Slightly taller height for a prominent portrait view */
   object-fit: cover;
   display: block;
 }
@@ -726,7 +705,7 @@ section h2 {
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .carousel-slide {
-    height: 300px;
+    height: 480px; /* Taller portrait height for mobile */
   }
   
   .carousel-button {
