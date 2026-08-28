@@ -200,6 +200,54 @@ section h2 {
 }
 
 /* ---------- SERVICE CARDS ---------- */
+
+/* ---------- SERVICE DETAILS DROPDOWN ---------- */
+.service-details {
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 0.75rem;
+}
+
+.service-details summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--warm-gold);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.service-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.service-details summary::after {
+  content: "+";
+  font-size: 1.1rem;
+  margin-left: 0.5rem;
+  transition: transform 0.25s ease;
+}
+
+.service-details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.service-details ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.2rem;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.service-details li {
+  margin-bottom: 0.4rem;
+}
+
 .service-grid,
 .testimonial-grid {
   display: grid;
