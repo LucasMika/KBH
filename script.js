@@ -255,3 +255,14 @@ function ui(el, text, cls) {
     console.log("[ServiceCheck] handler bound");
   });
 })();
+
+// ---------- SERVICE CARD TOGGLES ----------
+document.querySelectorAll(".service-toggle").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const panel = btn.nextElementSibling;
+    const isOpen = panel.getAttribute("data-open") === "true";
+
+    panel.setAttribute("data-open", String(!isOpen));
+    btn.setAttribute("aria-expanded", String(!isOpen));
+  });
+});

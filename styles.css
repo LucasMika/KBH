@@ -200,85 +200,75 @@ section h2 {
 }
 
 /* ---------- SERVICE CARDS ---------- */
+.service-grid {
+  align-items: start; /* stops row-stretching between cards */
+}
 
-/* ---------- SERVICE DETAILS DROPDOWN ---------- */
+.service-card {
+  align-self: start;
+}
+
+/* ---------- SERVICE DETAILS (animated) ---------- */
 .service-details {
   margin-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 0.75rem;
 }
 
-.service-details summary {
+.service-toggle {
   cursor: pointer;
   font-weight: 600;
   font-size: 0.85rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--warm-gold);
-  list-style: none;
+  background: none;
+  border: none;
+  padding: 0;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-family: inherit;
 }
 
-.service-details summary::-webkit-details-marker {
-  display: none;
-}
-
-.service-details summary::after {
-  content: "+";
+.service-toggle .icon {
   font-size: 1.1rem;
-  margin-left: 0.5rem;
-  transition: transform 0.25s ease;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.service-details[open] summary::after {
+.service-toggle[aria-expanded="true"] .icon {
   transform: rotate(45deg);
 }
 
-.service-details ul {
-  margin: 0.75rem 0 0;
+.service-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s ease;
+}
+
+.service-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.service-panel > ul {
+  overflow: hidden;
+  margin: 0;
   padding-left: 1.2rem;
   color: var(--text-secondary);
   font-size: 0.92rem;
   line-height: 1.6;
 }
 
-.service-details li {
+.service-panel[data-open="true"] > ul {
+  margin-top: 0.75rem;
+}
+
+.service-panel > ul > li {
   margin-bottom: 0.4rem;
-}
-
-.service-grid,
-.testimonial-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
-}
-
-.service-card,
-.testimonials figure {
-  background: rgba(32, 22, 22, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 1.8rem;
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.service-card:hover,
-.service-card:focus-within,
-.testimonials figure:hover,
-.testimonials figure:focus-within {
-  transform: translateY(-6px);
-  border-color: var(--velvet-red);
-}
-
-.service-card h3 {
-  margin-top: 0;
-  font-size: 1.3rem;
-}
-
-.service-card p {
-  color: var(--text-secondary);
 }
 
 /* ---------- MENUS ---------- */
