@@ -793,3 +793,133 @@ section h2 {
 .faq-item .service-panel > ul > li {
   color: var(--text-secondary);
 }
+/* ---------- PAGE 2 INTRO ---------- */
+.page-intro {
+  text-align: center;
+  padding-top: 4rem;
+  margin-bottom: 3rem;
+}
+
+.page-intro h2 {
+  font-size: clamp(2rem, 4vw + 1rem, 3.2rem);
+  margin-bottom: 0.5rem;
+}
+
+.page-intro p {
+  color: var(--text-secondary);
+}
+
+/* ---------- PRICING ---------- */
+.pricing {
+  max-width: 1000px;
+  margin: 0 auto 5rem;
+}
+
+.pricing-note {
+  text-align: center;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: -1rem auto 2.5rem;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.price-card {
+  background: rgba(32, 22, 22, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 2rem 1.8rem;
+  text-align: center;
+}
+
+.price-card.featured {
+  border-color: var(--warm-gold);
+  box-shadow: 0 12px 30px rgba(255, 177, 109, 0.12);
+}
+
+.price-card h3 {
+  margin: 0 0 0.75rem;
+}
+
+.price {
+  margin: 0 0 1.25rem;
+}
+
+.price .amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--warm-gold);
+}
+
+.price .per {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.price-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.price-card li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.table-wrap {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.addon-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(32, 22, 22, 0.75);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.addon-table caption {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.addon-table th,
+.addon-table td {
+  padding: 0.9rem 1.4rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.addon-table th {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--warm-gold);
+}
+
+.addon-table td:last-child,
+.addon-table th:last-child {
+  text-align: right;
+}
+
+.addon-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.addon-table td {
+  color: var(--text-secondary);
+}
