@@ -1106,3 +1106,14 @@ a.logo-wrap {
     font-size: 1.6rem;
   }
 }
+
+.container-note {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  max-width: 560px;
+  margin: 1.5rem auto 0;
+}
+
+.container-note strong {
+  color: var(--warm-gold);
+}
