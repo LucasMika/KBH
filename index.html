@@ -16,21 +16,17 @@
   </head>
   <body>
     <header class="site-header">
-      <div class="logo-wrap">
+      <a href="index.html" class="logo-wrap" aria-label="Savory Creations home">
         <img src="/assets/birdlogosmall.webp" alt="Savory Creations pepper and garlic mark" class="logo" />
         <div class="brand-text">
           <h1>Savory Creations</h1>
           <p>Personal Chef Services</p>
         </div>
-      </div>
-      <nav class="main-nav" id="site-navigation">
-        <a href="#services">Services</a>
-        <a href="#about">About Me</a>
-        <a href="#gallery-carousel">Gallery</a>
-        <a href="info.html#pricing">Pricing</a>
-        <a href="info.html#faq">FAQ</a>
-        <a href="info.html#where">Service Area</a>
-        <a href="#contact">Contact</a>
+      </a>
+      <nav class="main-nav" id="site-navigation" aria-label="Pages">
+        <a href="index.html" class="page-link active" aria-current="page">Home</a>
+        <a href="info.html" class="page-link">Pricing &amp; Info</a>
+        <a href="#contact" class="nav-contact">Contact</a>
       </nav>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
         <span></span><span></span><span></span>
@@ -184,6 +180,11 @@
         </div>
       </section>
     -->
+
+      <section class="next-page">
+        <p>Want to know about pricing, FAQs, and where I cook?</p>
+        <a href="info.html" class="cta-button">See Pricing &amp; Info &rarr;</a>
+      </section>
 
       <section class="contact" id="contact">
         <h2>Let’s Cook Something Memorable</h2>

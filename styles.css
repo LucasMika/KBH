@@ -923,3 +923,66 @@ section h2 {
 .addon-table td {
   color: var(--text-secondary);
 }
+
+/* ---------- PAGE NAV (two pages) ---------- */
+a.logo-wrap {
+  color: inherit;
+}
+
+.main-nav {
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.main-nav .page-link {
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.main-nav .page-link::after {
+  display: none;
+}
+
+.main-nav .page-link:hover,
+.main-nav .page-link:focus {
+  border-color: var(--warm-gold);
+}
+
+.main-nav .page-link.active {
+  background: var(--warm-gold);
+  border-color: var(--warm-gold);
+  color: var(--deep-chocolate);
+  font-weight: 600;
+}
+
+.main-nav .nav-contact {
+  margin-left: 0.75rem;
+}
+
+@media (max-width: 992px) {
+  .main-nav.open {
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .main-nav .nav-contact {
+    margin-left: 0;
+  }
+}
+
+/* ---------- NEXT PAGE TEASER ---------- */
+.next-page {
+  text-align: center;
+}
+
+.next-page p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.next-page .cta-button {
+  margin-top: 1rem;
+}
